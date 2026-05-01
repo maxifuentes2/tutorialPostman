@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VNTG-HUB | Documentación API</title>
+    <title>VNTG-HUB | Documentación para Colaboradores</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -14,10 +14,11 @@
         .method-put { background: #3b82f6; }
         .method-get { background: #f59e0b; }
         .method-delete { background: #ef4444; }
-        pre { background-color: #18181b; border: 1px solid #27272a; border-radius: 0.75rem; padding: 1.5rem; overflow-x: auto; }
+        pre { background-color: #18181b; border: 1px solid #27272a; border-radius: 0.75rem; padding: 1.5rem; overflow-x: auto; position: relative; }
         code { color: #f4f4f5; font-size: 0.875rem; }
         .card { background: #18181b; border: 1px solid #27272a; transition: all 0.3s ease; }
         .card:hover { border-color: #ff5e00; transform: translateY(-2px); }
+        .status-badge { background: rgba(255, 94, 0, 0.1); border: 1px solid rgba(255, 94, 0, 0.2); }
     </style>
 </head>
 <body class="p-4 md:p-12">
@@ -25,74 +26,74 @@
     <div class="max-w-5xl mx-auto">
         <!-- Header -->
         <header class="mb-12 border-b border-zinc-800 pb-8 text-center md:text-left">
-            <h1 class="text-4xl font-black italic tracking-tighter uppercase leading-none mb-4">
-                VNTG <span class="brand-orange">API GUIDE</span>
-            </h1>
-            <p class="text-zinc-500 font-bold uppercase tracking-[0.3em] text-xs">
-                <i class="fa-solid fa-bolt brand-orange mr-2"></i> Manual de Carga de Inventario | Maipú, Argentina
-            </p>
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div>
+                    <h1 class="text-4xl font-black italic tracking-tighter uppercase leading-none mb-4">
+                        VNTG <span class="brand-orange">PARTNERS GUIDE</span>
+                    </h1>
+                    <p class="text-zinc-500 font-bold uppercase tracking-[0.3em] text-[10px] flex items-center justify-center md:justify-start gap-2">
+                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                        Red Privada Tailscale Activa | Maipú, Argentina
+                    </p>
+                </div>
+                <div class="status-badge px-6 py-3 rounded-2xl text-center">
+                    <p class="text-[9px] font-black uppercase tracking-widest text-zinc-400 mb-1">Host de la Base de Datos</p>
+                    <p class="text-sm font-black brand-orange tracking-tighter">kernelos-pc:5000</p>
+                </div>
+            </div>
         </header>
+
+        <!-- Sección de Requisitos -->
+        <div class="bg-blue-900/10 border border-blue-500/20 p-6 rounded-2xl mb-12 flex gap-4 items-center">
+            <i class="fa-solid fa-circle-info text-blue-400 text-2xl"></i>
+            <p class="text-xs font-bold text-blue-200 uppercase tracking-wider leading-relaxed">
+                Importante: Para que estos enlaces funcionen en Postman, debes estar conectado a <span class="text-white underline">Tailscale</span>. MagicDNS resolverá automáticamente la dirección del servidor de Máximo.
+            </p>
+        </div>
 
         <!-- Productos Section -->
         <section class="mb-16">
             <h2 class="text-2xl font-black italic uppercase mb-8 flex items-center gap-3">
-                <i class="fa-solid fa-box-archive brand-orange"></i> Gestión de Productos
+                <i class="fa-solid fa-box-archive brand-orange"></i> Inventario de Productos
             </h2>
 
             <!-- POST PRODUCTO -->
-            <div class="card p-6 rounded-2xl mb-8">
+            <div class="card p-6 rounded-2xl mb-8 border-l-4 border-l-green-500">
                 <div class="flex flex-wrap items-center gap-4 mb-6">
                     <span class="method-post px-3 py-1 rounded-lg text-[10px] font-black uppercase text-white">POST</span>
-                    <code class="text-brand-orange font-bold">http://localhost:5000/api/products</code>
-                    <span class="text-zinc-500 text-xs ml-auto italic">Crear nuevo producto</span>
+                    <code class="text-brand-orange font-bold">http://kernelos-pc:5000/api/products</code>
+                    <span class="text-zinc-500 text-[10px] ml-auto font-black uppercase">Subir nuevo Item</span>
                 </div>
                 <pre><code>{
   "title": "Figura Coleccionable Satoru Gojo - Jujutsu Kaisen",
   "description": "Increíble figura de colección...",
   "price": 70000.00,
   "stock": 2,
-  "images": "https://res.cloudinary.com/...",
+  "images": "url_principal",
   "categoryId": 7,
   "escala": "1:8",
   "fabricante": "Bandai / Banpresto",
   "anio": "2024",
   "material": "PVC y ABS",
   "estado": "Nuevo (Sellado)",
-  "gallery": [
-    "url_imagen_1",
-    "url_imagen_2"
-  ]
+  "gallery": ["url_1", "url_2"]
 }</code></pre>
             </div>
 
             <!-- PUT PRODUCTO -->
-            <div class="card p-6 rounded-2xl mb-8">
+            <div class="card p-6 rounded-2xl mb-8 border-l-4 border-l-blue-500">
                 <div class="flex flex-wrap items-center gap-4 mb-6">
                     <span class="method-put px-3 py-1 rounded-lg text-[10px] font-black uppercase text-white">PUT</span>
-                    <code class="text-brand-orange font-bold">http://localhost:5000/api/products/{id}</code>
-                    <span class="text-zinc-500 text-xs ml-auto italic text-right">Actualizar producto por ID (Ej: /210)</span>
+                    <code class="text-brand-orange font-bold">http://kernelos-pc:5000/api/products/{id}</code>
+                    <span class="text-zinc-500 text-[10px] ml-auto font-black uppercase">Editar por ID</span>
                 </div>
-                <pre><code>{
-    "title": "Batman (1989) Batmobile - Edición Coleccionista",
-    "description": "La representación definitiva del caballero de la noche...",
-    "price": 120000.00,
-    "stock": 5,
-    "categoryId": 1,
-    "franchise": "DC Comics",
-    "escala": "1:18 Premium",
-    "fabricante": "DC Collectibles",
-    "anio": "1989",
-    "material": "Die-cast Metal",
-    "estado": "Nuevo / Sellado"
-}</code></pre>
             </div>
 
             <!-- GET PRODUCTO -->
-            <div class="card p-6 rounded-2xl">
+            <div class="card p-6 rounded-2xl border-l-4 border-l-amber-500">
                 <div class="flex items-center gap-4">
                     <span class="method-get px-3 py-1 rounded-lg text-[10px] font-black uppercase text-white">GET</span>
-                    <code class="text-brand-orange font-bold">http://localhost:5000/api/products/{id}</code>
-                    <span class="text-zinc-500 text-xs ml-auto italic text-right">Ver detalle completo</span>
+                    <code class="text-brand-orange font-bold">http://kernelos-pc:5000/api/products/{id}</code>
                 </div>
             </div>
         </section>
@@ -100,7 +101,7 @@
         <!-- Categorias Section -->
         <section class="mb-16">
             <h2 class="text-2xl font-black italic uppercase mb-8 flex items-center gap-3">
-                <i class="fa-solid fa-list brand-orange"></i> Gestión de Categorías
+                <i class="fa-solid fa-list brand-orange"></i> Control de Categorías
             </h2>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -108,53 +109,45 @@
                 <div class="card p-6 rounded-2xl">
                     <div class="flex items-center gap-4 mb-4">
                         <span class="method-post px-3 py-1 rounded-lg text-[10px] font-black uppercase text-white">POST</span>
-                        <span class="text-[11px] font-bold text-zinc-400 italic">Nueva Categoría</span>
+                        <span class="text-[10px] font-black text-zinc-400 uppercase italic">Crear Categoría</span>
                     </div>
-                    <code class="block mb-4 text-xs">/api/categories</code>
-                    <pre class="p-4 text-xs"><code>{ "name": "Jujutsu Kaisen" }</code></pre>
-                </div>
-
-                <!-- PUT CAT -->
-                <div class="card p-6 rounded-2xl">
-                    <div class="flex items-center gap-4 mb-4">
-                        <span class="method-put px-3 py-1 rounded-lg text-[10px] font-black uppercase text-white">PUT</span>
-                        <span class="text-[11px] font-bold text-zinc-400 italic">Editar Nombre</span>
-                    </div>
-                    <code class="block mb-4 text-xs">/api/categories/{id}</code>
-                    <pre class="p-4 text-xs"><code>{ "name": "Cine & Series" }</code></pre>
+                    <code class="block mb-4 text-xs">http://kernelos-pc:5000/api/categories</code>
+                    <pre class="p-4 text-xs"><code>{ "name": "Nombre" }</code></pre>
                 </div>
 
                 <!-- ADMIN GET -->
                 <div class="card p-6 rounded-2xl border-dashed">
                     <div class="flex items-center gap-4 mb-2">
                         <span class="method-get px-3 py-1 rounded-lg text-[10px] font-black uppercase text-white">GET</span>
-                        <span class="text-[11px] font-bold text-zinc-400 italic">Ver todas las IDs</span>
+                        <span class="text-[10px] font-black text-zinc-400 uppercase italic">Ver Listado IDs</span>
                     </div>
-                    <code class="block text-xs">/api/admin/categories</code>
-                </div>
-
-                <!-- DELETE CAT -->
-                <div class="card p-6 rounded-2xl">
-                    <div class="flex items-center gap-4 mb-2">
-                        <span class="method-delete px-3 py-1 rounded-lg text-[10px] font-black uppercase text-white">DELETE</span>
-                        <span class="text-[11px] font-bold text-zinc-400 italic">Eliminar (Forzado)</span>
-                    </div>
-                    <code class="block text-xs">/api/categories/{id}</code>
+                    <code class="block text-xs">http://kernelos-pc:5000/api/admin/categories</code>
                 </div>
             </div>
         </section>
 
         <!-- Footer Info -->
         <footer class="bg-zinc-900/50 p-8 rounded-[2rem] border border-zinc-800 text-center">
-            <h4 class="text-xs font-black uppercase tracking-widest mb-4">💡 Recordatorios Técnicos</h4>
-            <ul class="text-[11px] text-zinc-500 space-y-2 uppercase font-bold italic">
-                <li><span class="brand-orange">•</span> Las rutas con <span class="text-white">/{id}</span> requieren el número real de la base de datos</li>
-                <li><span class="brand-orange">•</span> En Postman: <span class="text-white">Body -> raw -> JSON</span></li>
-                <li><span class="brand-orange">•</span> Galería: Es un array <span class="text-white">[ "url1", "url2" ]</span></li>
-            </ul>
-            <div class="mt-8 pt-8 border-t border-zinc-800">
-                <p class="text-[9px] text-zinc-600 font-black uppercase tracking-widest">
-                    VNTG-HUB &copy; 2026
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <i class="fa-solid fa-network-wired brand-orange mb-3 text-xl"></i>
+                    <h4 class="text-[10px] font-black uppercase mb-2">Conexión</h4>
+                    <p class="text-[10px] text-zinc-500 uppercase font-bold">Tailscale MagicDNS</p>
+                </div>
+                <div>
+                    <i class="fa-solid fa-code brand-orange mb-3 text-xl"></i>
+                    <h4 class="text-[10px] font-black uppercase mb-2">Formato</h4>
+                    <p class="text-[10px] text-zinc-500 uppercase font-bold">JSON Raw Data</p>
+                </div>
+                <div>
+                    <i class="fa-solid fa-database brand-orange mb-3 text-xl"></i>
+                    <h4 class="text-[10px] font-black uppercase mb-2">Base de Datos</h4>
+                    <p class="text-[10px] text-zinc-500 uppercase font-bold">MySQL (PC Maipú)</p>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-zinc-800">
+                <p class="text-[9px] text-zinc-600 font-black uppercase tracking-[0.4em]">
+                    VNTG-HUB &copy; 2026 | ACCESO COLABORADORES
                 </p>
             </div>
         </footer>
